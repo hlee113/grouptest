@@ -12,7 +12,8 @@ load_dotenv(find_dotenv())
 # PROD configs
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DBCONNECTION']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DBCONNECTION']    #use this for Heroku
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')     # local test
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DBCONNECTION']
@@ -149,6 +150,7 @@ if __name__ == "__main__":
     db.create_all()
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
+    print(getAllUsers())
     #port = int(os.environ.get('PORT', 7000))
     app.run(debug=True, port = 8080)
     #app.run(debug=True, port = 8000)
